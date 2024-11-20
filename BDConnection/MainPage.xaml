@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BDConnection.MainPage">
+
+    <!-- Contenedor principal -->
+    <Grid>
+        <!-- Imagen de fondo -->
+        <Image Source="fondo.jpg"
+               Aspect="AspectFill"
+               Opacity="0.5" 
+               IsVisible="True" />
+
+        <!-- Contenido de la página -->
+        <ScrollView>
+            <VerticalStackLayout
+                Padding="30,0"
+                Spacing="25">
+
+                <!-- Botones principales -->
+                <HorizontalStackLayout
+                    Spacing="10"
+                    HorizontalOptions="Center">
+                    <Button 
+                        Text="Registrarte" 
+                        TextColor="Black"
+                        Clicked="OnRegisterClicked"
+                        HeightRequest="40" />
+                    <Button 
+                        Text="Iniciar sesión" 
+                        TextColor="Black"
+                        Clicked="OnLoginClicked"
+                        HeightRequest="40" />
+                    <Button 
+                        Text="Eliminar cuenta" 
+                        TextColor="Black"
+                        Clicked="OnDeleteUserClicked"
+                        HeightRequest="40" />
+                </HorizontalStackLayout>
+
+                <!-- Botón para modificar usuario -->
+                <HorizontalStackLayout
+                    Spacing="10"
+                    HorizontalOptions="Start">
+                    <Button 
+                        x:Name="ModifyUserButton"
+                        Text="Modificar Usuario"
+                        TextColor="Black"
+                        Clicked="OnModifyUserClicked"
+                        HeightRequest="40"
+                        IsVisible="False" />
+                </HorizontalStackLayout>
+
+                <!-- Título -->
+                <Label
+                    Text="Biblioteca"
+                    FontSize="24"
+                    TextColor="Black"
+                    HorizontalOptions="Center"
+                    Style="{StaticResource Headline}"
+                    SemanticProperties.HeadingLevel="Level1" />
+
+                <!-- Buscador de libros -->
+                <Entry x:Name="buscadorLibroEntry" Placeholder="Buscar libro por nombre..." TextColor="Black" />
+                <Button 
+                    Text="🔍 Buscar" 
+                    TextColor="Black"
+                    Clicked="OnSearchBookClicked"
+                    HorizontalOptions="Center" />
+
+                <!-- Entradas para registrar libros -->
+                <Entry x:Name="nombreLibroEntry" Placeholder="Nombre del libro" TextColor="Black" />
+                <Entry x:Name="autorLibroEntry" Placeholder="Autor del libro" TextColor="Black" />
+                <Entry x:Name="paginasLibroEntry" Placeholder="Páginas" Keyboard="Numeric" TextColor="Black" />
+                <Entry x:Name="tomoLibroEntry" Placeholder="Tomo" Keyboard="Numeric" TextColor="Black" />
+
+                <Button Text="Registrar libro" TextColor="Black" Clicked="OnRegisterBookClicked" IsEnabled="{Binding IsUserLoggedIn}" />
+
+                <!-- Botón para eliminar libro -->
+                <Button 
+                    Text="🗑️ Eliminar libro" 
+                    TextColor="Black"
+                    Clicked="OnDeleteBookClicked"
+                    IsEnabled="{Binding IsUserLoggedIn}" 
+                    BackgroundColor="Red" 
+                    HorizontalOptions="Center" />
+
+                <!-- Mensaje de libro encontrado -->
+                <Label x:Name="bookFoundLabel" IsVisible="False" Text="Libro encontrado" TextColor="Black" FontSize="Medium" HorizontalOptions="Center" />
+
+                <!-- Detalles del libro encontrado -->
+                <Label x:Name="bookDetailsLabel" IsVisible="False" FontSize="Small" TextColor="Black" HorizontalOptions="Center" />
+                
+
+                <!-- Lista de libros -->
+                <ListView x:Name="librosListView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Nombre}" Detail="{Binding Autor}" TextColor="Black" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
